@@ -1,5 +1,3 @@
-# knitted html
-*.html
 #vim backup files
 *~
 *.swp
