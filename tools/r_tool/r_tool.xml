@@ -1,0 +1,22 @@
+<tool id="r_tool" name="r_tool" profile="17.05" version="1.1.0">
+  <description>Demo processing saved RDS with SummarizedExperiment 
+  from BCBio while providing dependencies as Docker container
+  </description>
+  <requirements>
+    <container type="docker">sliders/rstudio-bcbiornaseq:v2</container>
+  </requirements>  
+  <command>
+    Rscript '$__tool_directory__/r_tool.R' '$input' '$out_file1' 
+  </command>
+  <inputs>
+    <param format="binary" name="input" type="data" label="SummExper" help="Dataset missing? See Help below."/>
+  </inputs>
+  <outputs>
+    <data format="pdf" name="out_file1"/>
+  </outputs>
+  <help>
+     You need to load a prepared RDS dataset into your Galaxy history.
+     This tool will generate a PDF plot with sample read counts.
+     You can click on the eye icon of the output datset to view the plot.
+  </help>
+</tool>

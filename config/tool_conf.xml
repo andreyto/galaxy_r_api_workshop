@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<toolbox monitor="true" tool_path="/extra/tools">
+  <section id="r_tools" name="R Tools">
+    <tool file="r_tool/r_tool.xml" />
+  </section>
+</toolbox>
