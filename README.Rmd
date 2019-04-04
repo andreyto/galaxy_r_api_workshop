@@ -29,7 +29,7 @@ parameter `xxx`.
 - In a terminal, create a directory that will be bind-mounted to keep Galaxy data alive across container restarts: `mkdir galaxy_storage`
 - `docker create -v /export --name galaxy-store bgruening/galaxy-stable /bin/true`
    This is a big image - will take a while to pull.
-- `docker run -d -p 8080:80 --privileged --volumes-from galaxy-store bgruening/galaxy-stable`
+- `docker run -d -p 8080:80 -p 8800:8800 --privileged --volumes-from galaxy-store bgruening/galaxy-stable`
   We use `--privileged` to auto-mount reference data through CVMFS (works on Windows?)
 - Access container in Chrome at `localhost:8080`.
 - Go to User->Preferences->Manage API key. Click Create a new key. 
@@ -70,5 +70,23 @@ Download dataset by History Content API ID
 parsec datasets download_dataset --file_path . 5969b1f7201f12ae
 ```
 ```{r}
-data = readRDS("Galaxy5-[copd_brushings_rnaseq_bcb.rds].binary")
+data = readRDS("Galaxy1-[copd_brushings_rnaseq_bcb.rds].binary")
+data
 ```
+## Build Galaxy tool that works on our serialized BCBio SummarizedExperiment dataset
+
+This is a very primitive prototype. We do not define a datatype and use default `binary` format for the `rds` file.
+
+The primary objective is to demonstrate running a simple `Rscript` tool using our custom
+Docker container to provide the dependencies.
+
+We bind-mount several Galaxy config files and the tool itself into the container,  
+and override the necessary locations through GALAXY_CONFIG_xxx environment variables passed
+into the container. We do it in a fairly simplistic way just for demonstration.
+
+In any case, the real-life tool code development is much better done through `Planemo` and
+deployment through a local toolshed.
+
+**Note**: To provide absolute host paths for bind-mounting, we use Unix shell command `pwd`,
+which is not avalibale on Windows. You will have to edit the corresponding paths in the `docker run`
+command before if you are on Windows.
