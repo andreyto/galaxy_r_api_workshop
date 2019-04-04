@@ -51,7 +51,9 @@ parameter `xxx`.
 
 The API and bindings from different languages are described [here](https://galaxyproject.org/develop/api/)
 
-### Define API key and URL
+### Define API key and URL in your R console. 
+
+For now, this is just to record them somewhere to paste later in the terminal
 ```{r}
 GAL_URL="http://10.25.117.136:8080"
 GAL_API_KEY="73c730a5ac10f80d363bcd46b4ca28a8"
@@ -67,6 +69,7 @@ Download dataset by History Content API ID
 ```
 parsec datasets download_dataset --file_path . 5969b1f7201f12ae
 ```
+In your R console, do this:
 ```{r}
 data = readRDS("Galaxy1-[copd_brushings_rnaseq_bcb.rds].binary")
 data
@@ -105,7 +108,12 @@ command if you are on Windows. Better still, active Linux subsystem in Windows 1
 - When Docker inside the container pulls images, they do not get saved between container
   restarts. Expect to wait each time after a restart for the full pull when you run the tool
   for the first time.
-- Sometimes, for reasons unclear, you can get an error that docker is not available inside the container.
+- Sometimes, for reasons unclear, you can get an error status from the Galaxy tool, with the message
+  saying that docker is not available (inside the container). This happens after the tool job was in
+  a running (yellow) state for a while, and the Docker was pulling the container for the dependency.
+  Apparently, Docker daemon dies inside the container.
   Open interactie shell inside the contaioner using `docker exec -it galaxy bash` and start Docker there
   again with `service docker stop; service docker start`. Then, rerun the Galaxy tool.
 
+In the browser, go to `localhost:8080`, and run the tool R Tools -> r_tool. Click on the output dataset
+eye icon once it is green. You shuld see the plot.
