@@ -55,7 +55,7 @@ The API and bindings from different languages are described [here](https://galax
 
 ### Define API key and URL
 ```{r}
-GAL_URL="http://<YOUR_HOST_IP>:8080"
+GAL_URL="http://10.25.117.136:8080"
 GAL_API_KEY="73c730a5ac10f80d363bcd46b4ca28a8"
 ```
 
@@ -65,7 +65,10 @@ Run init and type your URL and key
 ```
 parsec init
 ```
-Download dataset
+Download dataset by History Content API ID
 ```
-parsec datasets download_dataset f2db41e1fa331b3e
+parsec datasets download_dataset --file_path . 5969b1f7201f12ae
+```
+```{r}
+data = readRDS("Galaxy5-[copd_brushings_rnaseq_bcb.rds].binary")
 ```
