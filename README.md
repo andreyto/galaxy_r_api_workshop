@@ -63,6 +63,8 @@ before Docker has created a bunch of other interface. You can find it through yo
 Network Properties control panel, whatever it is. **Note**: `localhost` or `127.0.0.1` will
 not work.
 
+In your R console, do this:
+
 ```{r}
 GAL_URL="http://10.25.117.136:8080"
 GAL_API_KEY="73c730a5ac10f80d363bcd46b4ca28a8"
@@ -91,7 +93,6 @@ You can play with other `parsec` commands, such as those that list datasets in h
 `parsec` GitHub README for the inspiration. `parsec` reflects most of the Galaxy API implemented 
 by the Bioblend Python client library.
 
-```
 ## Build Galaxy tool that works on our serialized BCBio SummarizedExperiment dataset
 
 This is a very primitive prototype. We do not define a datatype and use default `binary` format for the `rds` file.
@@ -111,16 +112,19 @@ which is not avalibale on Windows. You will have to edit the corresponding paths
 command if you are on Windows. Better still, active Linux subsystem in Windows 10 and use Bash shell.
 
 ### In a terminal on your *host*:
-- `git clone https://github.com/andreyto/galaxy_r_api_workshop.git`
-- `docker stop galaxy`
-- ```
+
+`git clone https://github.com/andreyto/galaxy_r_api_workshop.git`
+
+`docker stop galaxy`
+
+```
   docker run -d --rm -p 8080:80 -p 8800:8800 --name galaxy --privileged --volumes-from galaxy-store \
   -v `pwd`/galaxy_r_api_workshop:/extra \
   -e GALAXY_CONFIG_TOOL_CONFIG_FILE="/extra/config/tool_conf.xml,config/tool_conf.xml.sample,config/shed_tool_conf.xml" \
   -e GALAXY_CONFIG_JOB_CONFIG_FILE="/extra/config/job_conf.xml" \
   bgruening/galaxy-stable \
   bash -c "supervisorctl stop docker; service docker stop; service docker start; startup"
-  ```
+```
 
 **Notes**: 
 - When Docker inside the container pulls images, they do not get saved between container
