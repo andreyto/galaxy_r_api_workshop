@@ -65,7 +65,7 @@ Run init and type your URL and key
 ```
 parsec init
 ```
-Downlaod dataset
+Download dataset
 ```
 parsec datasets download_dataset f2db41e1fa331b3e
 ```
