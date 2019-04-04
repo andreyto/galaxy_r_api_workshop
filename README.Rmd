@@ -39,7 +39,7 @@ parameter `xxx`.
 
 *You can also use some other R, but we installed a couple of necessary packages into our container*
 
-- `docker run -v /home/rstudio/work2 --name rstudio-work sliders/rstudio-bcbiornaseq:v2 bash -c 'chown -R rstudio. /home/rstudio/work2'`
+- `docker run -v /home/rstudio/work2 --name rstudio-work sliders/rstudio-bcbiornaseq:v2 bash -c "chown -R rstudio. /home/rstudio/work2"`
   We created a volume owned by the user `rstudio` from the container
 - `docker run -d -p 8787:8787 -e PASSWORD=bcbio -e ROOT=TRUE --volumes-from rstudio-work  sliders/rstudio-bcbiornaseq:v2`
 - Access the R Studio Server at `localhost:8787`
