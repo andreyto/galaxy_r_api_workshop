@@ -24,7 +24,8 @@ parameter `xxx`.
 
 ### Galaxy container
 
-- In a terminal, create a directory that will be bind-mounted to keep Galaxy data alive across container restarts: `mkdir galaxy_storage`
+In a terminal on your *host*:
+
 - `docker create -v /export --name galaxy-store bgruening/galaxy-stable /bin/true`
    This is a big image - will take a while to pull.
 - `docker run -d -p 8080:80 -p 8800:8800 --rm --name galaxy --privileged --volumes-from galaxy-store bgruening/galaxy-stable`
@@ -36,6 +37,8 @@ parameter `xxx`.
 ### R Studio Container
 
 *You can also use some other R, but we installed a couple of necessary packages into our container*
+
+In a terminal on your *host*:
 
 - `docker run -v /home/rstudio/work2 --name rstudio-work sliders/rstudio-bcbiornaseq:v2 bash -c "chown -R rstudio. /home/rstudio/work2"`
   We created a volume owned by the user `rstudio` from the container
@@ -52,24 +55,42 @@ parameter `xxx`.
 The API and bindings from different languages are described [here](https://galaxyproject.org/develop/api/)
 
 ### Define API key and URL
+
+For now, this is just to record them somewhere to paste later in the terminal.
+
+Use the host IP for the URL. This should be the IP of the real host interface that existed
+before Docker has created a bunch of other interface. You can find it through your OS
+Network Properties control panel, whatever it is. **Note**: `localhost` or `127.0.0.1` will
+not work.
+
 ```{r}
 GAL_URL="http://10.25.117.136:8080"
 GAL_API_KEY="73c730a5ac10f80d363bcd46b4ca28a8"
 ```
 
-At first, we will still run command from the terminal:
+At first, we will still run commands from the terminal. You can wrap them in R `system()` function call
+to program `parsec` CLI execution from R.
 
 Run init and type your URL and key
 ```
 parsec init
 ```
-Download dataset by History Content API ID
+Download dataset by History Content API ID (get it by clicking on the dataset in Galaxy UI,
+then clicking on the I icon under the expanded dataset panel).
 ```
 parsec datasets download_dataset --file_path . 5969b1f7201f12ae
 ```
+
+In your R console, do this:
 ```{r}
 data = readRDS("Galaxy1-[copd_brushings_rnaseq_bcb.rds].binary")
 data
+```
+
+You can play with other `parsec` commands, such as those that list datasets in histories. Look at
+`parsec` GitHub README for the inspiration. `parsec` reflects most of the Galaxy API implemented 
+by the Bioblend Python client library.
+
 ```
 ## Build Galaxy tool that works on our serialized BCBio SummarizedExperiment dataset
 
