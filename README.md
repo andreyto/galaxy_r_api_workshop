@@ -48,8 +48,8 @@ In a terminal on your *host*:
 - Open Tools->Terminal, and `cd work2 && git clone https://github.com/andreyto/galaxy_r_api_workshop.git`
 - `sudo apt-get install python-pip`
 - `sudo pip install parsec`
-  These are command-line (CLI) client for the remote Galaxy API. This is the easiest way since there are no
-  R library bindings yet.
+  This is a command-line (CLI) client for the remote Galaxy API. Calling it in a subprocess from a R session is 
+  the easiest way to access Galaxy API from R since there are no R library bindings yet.
 
 ## Working in R
 
