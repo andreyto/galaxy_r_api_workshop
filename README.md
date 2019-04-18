@@ -110,7 +110,7 @@ deployment through a local toolshed.
 
 **Note**: To provide absolute host paths for bind-mounting, we use Unix shell command `pwd`,
 which is not avalibale on Windows. You will have to edit the corresponding paths in the `docker run`
-command if you are on Windows. Better still, active Linux subsystem in Windows 10 and use Bash shell.
+command if you are on Windows. Better still, activate Linux subsystem in Windows 10 and use Bash shell.
 
 ### In a terminal on your *host*:
 
