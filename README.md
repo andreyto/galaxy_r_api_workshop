@@ -4,7 +4,7 @@ output:html_notebook
 ---
 ## The Galaxy container image
 
-[README](https://github.com/bgruening/docker-galaxy-stable) contains detailed instructions
+The [README](https://github.com/bgruening/docker-galaxy-stable) in the @bgruening repository contains detailed instructions
 for controlling the container behavior.
 
 In particular, [this section](https://github.com/bgruening/docker-galaxy-stable#Galaxys-config-settings)
