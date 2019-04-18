@@ -127,6 +127,15 @@ command if you are on Windows. Better still, activate Linux subsystem in Windows
   bash -c "supervisorctl stop docker; service docker stop; service docker start; startup"
 ```
 
+### In your Chrome Web browser at the address `localhost:8080`:
+
+- You should see a tool section on the left called R Tools. Under that, you should see a tool called "r_tool".
+- Run the tool providing as input the `rds` file that you uploaded into Galaxy previously
+- Once the output dataset status turns to finished (green), click on the eye icon to view the plot saved in the PDF format
+- On your host, explore the content of the files that we bind-mounted from the cloned repository in order to get the 
+  tool deployed and working. Notice how we configured the local runner in `config/job_conf.xml` to execute Docker containers,
+  and how the tool's XML definition file declares the dependency as a container.
+
 **Notes**: 
 - When Docker inside the container pulls images, they do not get saved between container
   restarts. Expect to wait each time after a restart for the full pull when you run the tool
@@ -135,5 +144,5 @@ command if you are on Windows. Better still, activate Linux subsystem in Windows
   saying that docker is not available (inside the container). This happens after the tool job was in
   a running (yellow) state for a while, and the Docker was pulling the container for the dependency.
   Apparently, Docker daemon dies inside the container.
-  Open interactie shell inside the contaioner using `docker exec -it galaxy bash` and start Docker there
+  Open interactie shell inside the container using `docker exec -it galaxy bash` and start Docker there
   again with `service docker stop; service docker start`. Then, rerun the Galaxy tool.
